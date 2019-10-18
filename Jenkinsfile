@@ -3,19 +3,22 @@ pipeline {
 
     stages {
         stage('Create Kubernetes Cluster') {
+          steps {
            sh '''
               eksctl create cluster \
-                  --name cloudcapstone \
-                  --version 1 \
-                  --nodegroup-name standard-workers \
-                  --node-type t2.micro \
-                  --nodes 2 \
-                  --nodes-min 1 \
-                  --nodes-max 2 \
-                  --node-ami auto
+                --name cloudcapstone \
+                --version 1 \
+                --nodegroup-name standard-workers \
+                --node-type t2.micro \
+                --nodes 2 \
+                --nodes-min 1 \
+                --nodes-max 2 \
+                --node-ami auto
             '''
-        }
+           }
+        }      
         stage('Create Configuration File') {
+          steps {
             sh '''
               aws eks \
                 --region \
@@ -23,6 +26,7 @@ pipeline {
                 --update-kubeconfig \
                 --name cloudcapstone
             '''
+          }
         }
       }
     }
