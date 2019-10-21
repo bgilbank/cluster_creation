@@ -21,9 +21,8 @@ pipeline {
           steps {
             sh '''
               aws eks \
-                --region \
-                --us-west-2 \
-                --update-kubeconfig \
+                --region us-west-2 \
+                update-kubeconfig \
                 --name cloudcapstone
             '''
           }
